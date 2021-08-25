@@ -1,72 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Article from './Article';
 
 
-const MarketNews = (props) => {
+const MarketNews = () => {
     const [news, setNews] = useState([]);
+    const [amount, setAmount] = useState(5);
     
     let url = 'https://finnhub.io/api/v1/news?category=general&token=c2tseiaad3icl6gefg00'
 
     const fetchNews = () => {
         axios.get(url)
         .then((resp) => {
-            setNews(resp.data.slice(0,5))
+            setNews(resp.data.slice(0, parseInt(amount)))
         })
-        
-        console.log(news);
-    } 
+    }
 
     useEffect(() => {
         fetchNews();
         console.log(news);
-    }, [props.id])
+    }, [amount])
 
-    const newsArticle = () => {
-        if(news) {
-            if(news[0]) {
-                return (
-                <div className="articles">
-                    <div className="card bg-dark text-white" style={{height: "34rem", width: "28rem"}}>
-                        <img src={news[0].image} alt={news.id} />
-                        <h2>{news[0].headline}</h2>
-                        <p>{news[0].summary}</p>
-                    </div>
-
-                    <div className="card bg-dark text-white" style={{height: "34rem", width: "28rem"}}>
-                        <img src={news[1].image} alt={news.id} />
-                        <h2>{news[1].headline}</h2>
-                        <p>{news[1].summary}</p>
-                    </div>
-
-                    <div className="card bg-dark text-white" style={{height: "34rem", width: "28rem"}}>
-                        <img src={news[2].image} alt={news.id} />
-                        <h2>{news[2].headline}</h2>
-                        <p>{news[2].summary}</p>
-                        
-                    </div>
-
-                    <div className="card bg-dark text-white" style={{height: "34rem", width: "28rem"}}>
-                        <img src={news[3].image} alt={news.id} />
-                        <h2>{news[3].headline}</h2>
-                        <p>{news[3].summary}</p>
-                        
-                    </div>
-
-                    <div className="card bg-dark text-white" style={{height: "34rem", width: "28rem"}}>
-                        <img src={news[4].image} alt={news.id} />
-                        <h2>{news[4].headline}</h2>
-                        <p>{news[4].summary}</p>
-                        
-                    </div>
-                </div>
-                )
-            } else {
-                <h1>Loading...</h1>
-            }
-        } else {
-            <h1>Loading...</h1>
-        }
+    const selectChange = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        setAmount(e.target.value);
     }
 
     return (
@@ -74,9 +31,28 @@ const MarketNews = (props) => {
             <h1 className="home-head">Market News</h1>
             <div className="underline"></div>
 
-            {/* <button onClick={fetchNews} type="submit" className='btn btn-primary'>Refresh</button> */}
+            <select class="form-select bg-dark text-white" style={{width: "20rem"}} aria-label="Default select example" onChange={selectChange}>
+                <option selected>Select number of Articles to view</option>
+                <option value={5}>Five</option>
+                <option value={10}>Ten</option>
+                <option value={15}>Fifteen</option>
+            </select>
 
-            {newsArticle()}
+            
+            <div className="articles">
+                {news.map((article) => {
+                    console.log("hey");
+                    return (
+                    <section className="card bg-dark text-white" style={{height: "34rem", width: "28rem"}}>
+                        <img src={article.image} alt={"Article"} />
+                        <h2>{article.headline}</h2>
+                        <p>{article.summary}</p>
+                    </section>
+                    )
+                })}
+
+            </div>
+            
 
         </main>
     )

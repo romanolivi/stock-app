@@ -7,6 +7,7 @@ import { Nav, Navbar, NavbarBrand, NavDropdown } from 'react-bootstrap';
 import Home from './components/Home';
 import StockSearch from './components/StockSearch';
 import MarketNews from './components/MarketNews/MarketNews';
+import Trends from './components/Trends';
 
 function App() {
 
@@ -22,11 +23,11 @@ function App() {
           <Nav>
             <NavDropdown title="Stocks">
               <NavDropdown.Item href="/search">Stock Search</NavDropdown.Item>
-              <NavDropdown.Item href="/trends">Trends</NavDropdown.Item>
+              <NavDropdown.Item href="/charts">Charts</NavDropdown.Item>
               <NavDropdown.Item href="/options">Options</NavDropdown.Item>
             </NavDropdown>
             
-            <Nav.Link href="/charts">Charts</Nav.Link>
+            <Nav.Link href="/trends">Trends</Nav.Link>
             <Nav.Link href="/news">Market News</Nav.Link>
             <Nav.Link href="/contact">Contact</Nav.Link>
           </Nav>
@@ -38,6 +39,7 @@ function App() {
         <Route exact path={'/'} component={Home} />
         <Route exact path={'/search'} component={StockSearch} />
         <Route exact path={'/news'} component={MarketNews} />
+        <Route exact path={'/trends'} component={Trends} />
       </div>
 
       <div className="content">

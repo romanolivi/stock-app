@@ -58,7 +58,7 @@ const StockSearch = () => {
 
             <form>
                 <div className="form-group">
-                    <label className="form-label">Stock Ticker</label>
+                    <label className="form-label">Enter Stock Ticker</label>
                     <input type="text" name="stock" className="form-control" placeholder="Enter Stock" onChange={handleChange} />
                     <button type="submit" id="button" className="btn btn-primary mb-2" onClick={fetchStock}>Search</button>
                 </div>
