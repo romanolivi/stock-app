@@ -3,8 +3,18 @@ import axios from 'axios';
 import NumberFormat from 'react-number-format';
 
 
-const StockSearch = () => {
+const StockSearch = (props) => {
     const [stock, setStock] = useState();
+    const [users, setUsers] = useState([]);
+
+    const fetchUsers = () => {
+        axios.get("http://localhost:8080/api/users")
+        .then((resp) => {
+            console.log(resp.data[0])
+            setUsers(resp.data)
+        })
+
+    }
 
     const fetchStock = (e) => {
         e.preventDefault();
@@ -48,8 +58,8 @@ const StockSearch = () => {
     }
 
     useEffect(() => {
-        
-    })
+        fetchUsers();
+    }, [props.id]);
 
     return (
         <main className="content">
