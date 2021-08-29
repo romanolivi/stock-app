@@ -1,9 +1,15 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import data from '../data';
 
 const Home = () => {
     const [index, setIndex] = useState(0);
     const [cards, setCards] = useState(data);
+
+    const makeUser = () => {
+        let user = {id: 1, firstName: "Romano", lastName: "Livi"}
+        axios.post('http://localhost:8080/users', user)
+    }
 
     useEffect(() => {
         const lastIndex = data.length - 1;
@@ -12,6 +18,7 @@ const Home = () => {
         } else if(index > lastIndex) {
             setIndex(0);
         }
+        console.log("change");
     }, [index, cards])
 
     useEffect(() => {
@@ -23,6 +30,7 @@ const Home = () => {
 
     return (
         <section className="content">
+            <button className="btn btn-secondary" type="button" onClick={() => makeUser()}>Click</button>
             <h2 className="home-head">Romano's Stock App</h2>
             <div className="underline"></div>
             <div className="section-center">

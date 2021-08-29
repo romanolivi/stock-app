@@ -12,6 +12,7 @@ body {
 .card-image {
   margin-top: 20px;
   margin-bottom: 20px;
+  transition: var(--transition);
 }
 
 .card {
@@ -20,6 +21,7 @@ body {
   margin-top: 40px;
   width: 22rem;
   height: 28rem;
+  transition: var(--transition);
 }
 
 #button {
@@ -75,10 +77,6 @@ article {
   margin-right: auto;
 }
 
-.card {
-  border-radius: 50%;
-}
-
 .content { 
   text-align: center;
   margin-right: auto;
@@ -91,6 +89,7 @@ article {
   width: 800px;
   border-radius: 2em;
   margin-top: 10px;
+  transition: var(--transition);
 }
 
 
