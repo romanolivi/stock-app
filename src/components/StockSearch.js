@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import NumberFormat from 'react-number-format';
+import { connect } from 'react-redux';
 
 
 const StockSearch = (props) => {
     const [stock, setStock] = useState();
     const [users, setUsers] = useState([]);
+    let API_KEY = 'c2tseiaad3icl6gefg00';
+    let url = `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=${API_KEY}`;
 
     const fetchUsers = () => {
-        axios.get("http://localhost:8080/api/users")
+        axios.get("http://localhost:8080/users")
         .then((resp) => {
-            console.log(resp.data[0])
+            console.log(props)
             setUsers(resp.data)
         })
 
@@ -18,13 +21,10 @@ const StockSearch = (props) => {
 
     const fetchStock = (e) => {
         e.preventDefault();
-        let API_KEY = 'c2tseiaad3icl6gefg00'
-        let url = `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=${API_KEY}`
 
         axios.get(url)
         .then((resp) => {
             setStock(resp.data);
-            console.log(resp.data)
         })
         .catch(() => {
             console.log("Error while fetching stock data")
@@ -66,6 +66,7 @@ const StockSearch = (props) => {
             <h2 className="home-head">Stock Search</h2>
             <div className="underline"></div>
 
+            <h3>{props.username}</h3>
             <form>
                 <div className="form-group">
                     <label className="form-label">Enter Stock Ticker</label>
@@ -81,4 +82,10 @@ const StockSearch = (props) => {
 
 }
 
-export default StockSearch;
+const mapStateToProps = state => {
+    return {
+        username: state.username
+    }
+}
+
+export default connect(mapStateToProps)(StockSearch);

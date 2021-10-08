@@ -1,18 +1,17 @@
-
 const initialState = {
-    id: 0,
-    firstName = "",
-    lastName = "",
-    loggedIn = false
+    id: null,
+    username: '',
+    password: '',
+    loggedIn: false
 }
 
 export default (state = initialState, action) => {
     switch(action.type) {
         case 'LOG_IN':
-            return {...state, id: action.id, firstName: action.firstName, lastName: action.lastName, loggedIn: true }
-
+            return { ...state, id: action.id, username: action.username, password: action.password, loggedIn: true }
+        
         case 'SIGN_UP':
-            return {...state, id: action.id, firstName: action.firstName, lastName: action.lastName, loggedIn: true }
+            return { ...state, id: action.id, username: action.username, password: action.password, loggedIn: true }
 
         default:
             return state;
